@@ -29,21 +29,21 @@ const Index = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header
-        onMenuClick={() => setSidebarOpen(true)}
-        pageTitle={pageTitles[currentView]}
+    <div className="flex min-h-screen w-full bg-background">
+      <Sidebar
+        currentView={currentView}
+        onViewChange={setCurrentView}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex flex-1">
-        <Sidebar
-          currentView={currentView}
-          onViewChange={setCurrentView}
-          isOpen={sidebarOpen}
-          onClose={() => setSidebarOpen(false)}
+      <div className="flex flex-1 flex-col">
+        <Header
+          onMenuClick={() => setSidebarOpen(true)}
+          pageTitle={pageTitles[currentView]}
         />
 
-        <main className="flex-1 overflow-hidden lg:ml-0">
+        <main className="flex-1 overflow-hidden">
           <div className="h-[calc(100vh-4rem)]">{renderView()}</div>
         </main>
       </div>

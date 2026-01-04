@@ -1,6 +1,7 @@
 import { MessageSquare, FileText, Video, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.svg";
 
 export type ViewType = "chat" | "documents" | "meetings";
 
@@ -46,15 +47,20 @@ const Sidebar = ({ currentView, onViewChange, isOpen, onClose }: SidebarProps) =
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-64 border-r border-white/10 bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/10 bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex h-full flex-col text-sidebar-foreground">
-          {/* Mobile close button */}
-          <div className="flex items-center justify-between p-4 lg:hidden">
-            <span className="font-semibold text-white">Navigation</span>
-            <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-white/15">
+          {/* Logo section */}
+          <div className="flex h-16 items-center justify-between border-b border-white/20 px-4">
+            <img src={logo} alt="Ready Artwork" className="h-8 brightness-0 invert" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={onClose} 
+              className="lg:hidden text-white hover:bg-white/15"
+            >
               <X className="h-5 w-5" />
             </Button>
           </div>
