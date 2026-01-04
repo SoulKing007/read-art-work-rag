@@ -42,15 +42,8 @@ const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
           {pageTitle}
         </h1>
 
-        {/* Right: CTA and User menu */}
+        {/* Right: User menu */}
         <div className="flex items-center gap-3">
-          {/* Yellow CTA Button like Ready Artwork */}
-          <Button 
-            className="hidden sm:flex bg-accent text-accent-foreground font-medium hover:brightness-110 border-0"
-          >
-            Book A Demo
-          </Button>
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
