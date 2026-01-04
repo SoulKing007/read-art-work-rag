@@ -48,13 +48,13 @@
 
     --radius: 0.5rem;
 
-    /* Sidebar */
-    --sidebar-background: 0 0% 97%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 356 84% 46%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 356 84% 95%;
-    --sidebar-accent-foreground: 356 84% 36%;
+    /* Sidebar - Bold red with white text */
+    --sidebar-background: 356 84% 46%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 356 84% 46%;
+    --sidebar-accent: 356 84% 38%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 91%;
     --sidebar-ring: 356 84% 46%;
 
@@ -187,13 +187,13 @@
     @apply bg-red-100 text-red-700;
   }
 
-  /* Sidebar nav item */
+  /* Sidebar nav item - white text with hover effects */
   .nav-item {
-    @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-muted-foreground hover:bg-muted hover:text-foreground;
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-white/80 hover:bg-white/15 hover:text-white hover:translate-x-1 hover:scale-[1.02];
   }
 
   .nav-item.active {
-    @apply bg-sidebar-accent text-primary font-medium border-l-4 border-primary -ml-1 pl-5;
+    @apply bg-white/20 text-white font-medium border-l-4 border-white -ml-1 pl-5 shadow-lg;
   }
 
   /* Skeleton loader */
