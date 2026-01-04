@@ -46,15 +46,15 @@ const Sidebar = ({ currentView, onViewChange, isOpen, onClose }: SidebarProps) =
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-64 border-r border-border bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-64 border-r border-white/10 bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col text-sidebar-foreground">
           {/* Mobile close button */}
           <div className="flex items-center justify-between p-4 lg:hidden">
-            <span className="font-semibold">Navigation</span>
-            <Button variant="ghost" size="icon" onClick={onClose}>
+            <span className="font-semibold text-white">Navigation</span>
+            <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-white/15">
               <X className="h-5 w-5" />
             </Button>
           </div>
@@ -80,7 +80,7 @@ const Sidebar = ({ currentView, onViewChange, isOpen, onClose }: SidebarProps) =
                   <Icon className="h-5 w-5 flex-shrink-0" />
                   <div className="min-w-0 flex-1">
                     <div className="font-medium">{item.label}</div>
-                    <div className="truncate text-xs text-muted-foreground">
+                    <div className="truncate text-xs text-white/60">
                       {item.description}
                     </div>
                   </div>
@@ -90,10 +90,10 @@ const Sidebar = ({ currentView, onViewChange, isOpen, onClose }: SidebarProps) =
           </nav>
 
           {/* Bottom section */}
-          <div className="border-t border-border p-4">
-            <div className="rounded-lg bg-primary/5 p-3">
-              <p className="text-xs font-medium text-primary">Pro Tip</p>
-              <p className="mt-1 text-xs text-muted-foreground">
+          <div className="border-t border-white/20 p-4">
+            <div className="rounded-lg bg-white/10 p-3">
+              <p className="text-xs font-medium text-white">Pro Tip</p>
+              <p className="mt-1 text-xs text-white/70">
                 Upload documents to enhance AI responses with your data.
               </p>
             </div>
