@@ -8,7 +8,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import logo from "@/assets/logo.svg";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -17,9 +16,9 @@ interface HeaderProps {
 
 const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
   return (
-    <header className="sticky top-0 z-50 h-16 bg-background border-b border-border">
+    <header className="sticky top-0 z-40 h-16 bg-background border-b border-border">
       <div className="flex h-full items-center justify-between px-4 lg:px-6">
-        {/* Left: Menu button and logo */}
+        {/* Left: Menu button (mobile only) */}
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
@@ -29,14 +28,10 @@ const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
           >
             <Menu className="h-5 w-5" />
           </Button>
-          
-          <div className="flex items-center">
-            <img src={logo} alt="Ready Artwork" className="h-10" />
-          </div>
         </div>
 
         {/* Right: User menu */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-auto">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
