@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import logo from "@/assets/logo.svg";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -16,31 +17,23 @@ interface HeaderProps {
 
 const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
   return (
-    <header className="sticky top-0 z-50 h-16 bg-primary">
+    <header className="sticky top-0 z-50 h-16 bg-background border-b border-border">
       <div className="flex h-full items-center justify-between px-4 lg:px-6">
         {/* Left: Menu button and logo */}
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden text-primary-foreground hover:bg-primary-foreground/10"
+            className="lg:hidden"
             onClick={onMenuClick}
           >
             <Menu className="h-5 w-5" />
           </Button>
           
-          <div className="flex items-center gap-3">
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-normal text-primary-foreground/80">RAG</span>
-              <span className="text-lg font-bold text-primary-foreground">Dashboard</span>
-            </div>
+          <div className="flex items-center">
+            <img src={logo} alt="Ready Artwork" className="h-10" />
           </div>
         </div>
-
-        {/* Center: Page title */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-lg font-semibold text-primary-foreground hidden md:block">
-          {pageTitle}
-        </h1>
 
         {/* Right: User menu */}
         <div className="flex items-center gap-3">
@@ -48,11 +41,11 @@ const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="flex items-center gap-2 px-2 text-primary-foreground hover:bg-primary-foreground/10"
+                className="flex items-center gap-2 px-2"
               >
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="" alt="User" />
-                  <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground text-sm font-medium">
+                  <AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">
                     JD
                   </AvatarFallback>
                 </Avatar>
