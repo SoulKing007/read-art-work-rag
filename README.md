@@ -1,73 +1,77 @@
-# Welcome to your Lovable project
+# Ready Artwork RAG System
 
-## Project info
+Client knowledge system for MeeFog with RAG (Retrieval-Augmented Generation) powered by LangChain and LangGraph.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Project Structure
 
-## How can I edit this code?
+This is a monorepo containing:
+- **Frontend**: React + TypeScript + Vite + Shadcn UI (root directory)
+- **Backend**: Node.js + LangChain + LangGraph RAG API (`/backend` directory)
 
-There are several ways of editing your application.
+## Frontend Setup
 
-**Use Lovable**
+The frontend is a React application built with modern tools.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Requirements: Node.js 20+ & npm - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Frontend Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The frontend will run on `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Backend Development
 
-**Use GitHub Codespaces**
+See the [backend README](./backend/README.md) for detailed setup instructions.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+cd backend
+npm install
+cp .env.example .env
+# Add your credentials to .env
+npm run dev
+```
 
-## What technologies are used for this project?
+The backend will run on `http://localhost:3000`
 
-This project is built with:
+## Technologies
 
-- Vite
+### Frontend
+- React 18
 - TypeScript
-- React
-- shadcn-ui
+- Vite
+- Shadcn UI
 - Tailwind CSS
+- React Router
+- TanStack Query
 
-## How can I deploy this project?
+### Backend
+- Node.js 20+
+- LangChain.js
+- LangGraph
+- Supabase (Vector Store)
+- OpenAI (LLM & Embeddings)
+- Express.js
+- TypeScript
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Deployment
 
-## Can I connect a custom domain to my Lovable project?
+### Frontend
+Deploy the frontend to any static hosting service (Vercel, Netlify, etc.)
 
-Yes, you can!
+```sh
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Backend
+Deploy the backend to Railway. See [backend/README.md](./backend/README.md) for detailed instructions.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## License
+
+MIT
