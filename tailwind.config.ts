@@ -61,11 +61,12 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         brand: {
-          orange: "hsl(var(--brand-orange))",
-          "orange-light": "hsl(var(--brand-orange-light))",
-          "orange-dark": "hsl(var(--brand-orange-dark))",
-          navy: "hsl(var(--brand-navy))",
-          "navy-light": "hsl(var(--brand-navy-light))",
+          red: "hsl(var(--brand-red))",
+          "red-light": "hsl(var(--brand-red-light))",
+          "red-dark": "hsl(var(--brand-red-dark))",
+          yellow: "hsl(var(--brand-yellow))",
+          "yellow-light": "hsl(var(--brand-yellow-light))",
+          black: "hsl(var(--brand-black))",
           gray: "hsl(var(--brand-gray))",
           "gray-light": "hsl(var(--brand-gray-light))",
           "gray-medium": "hsl(var(--brand-gray-medium))",
@@ -75,6 +76,10 @@ export default {
           "user-fg": "hsl(var(--chat-user-fg))",
           "bot-bg": "hsl(var(--chat-bot-bg))",
           "bot-fg": "hsl(var(--chat-bot-fg))",
+        },
+        header: {
+          bg: "hsl(var(--header-bg))",
+          fg: "hsl(var(--header-fg))",
         },
       },
       borderRadius: {

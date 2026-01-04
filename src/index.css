@@ -6,62 +6,67 @@
 
 @layer base {
   :root {
-    /* Brand Colors */
-    --brand-orange: 16 100% 60%;
-    --brand-orange-light: 16 100% 70%;
-    --brand-orange-dark: 16 100% 50%;
-    --brand-navy: 228 35% 15%;
-    --brand-navy-light: 228 25% 25%;
-    --brand-gray: 220 9% 46%;
-    --brand-gray-light: 220 20% 97%;
-    --brand-gray-medium: 220 13% 91%;
+    /* Brand Colors - Ready Artwork inspired */
+    --brand-red: 356 84% 46%;
+    --brand-red-light: 356 84% 56%;
+    --brand-red-dark: 356 84% 36%;
+    --brand-yellow: 45 100% 51%;
+    --brand-yellow-light: 45 100% 61%;
+    --brand-black: 0 0% 10%;
+    --brand-gray: 0 0% 40%;
+    --brand-gray-light: 0 0% 97%;
+    --brand-gray-medium: 0 0% 91%;
 
     /* Semantic tokens */
     --background: 0 0% 100%;
-    --foreground: 228 35% 15%;
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 228 35% 15%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 228 35% 15%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 16 100% 60%;
+    --primary: 356 84% 46%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 20% 97%;
-    --secondary-foreground: 228 35% 15%;
+    --secondary: 0 0% 97%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 220 20% 97%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 0 0% 97%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 220 20% 97%;
-    --accent-foreground: 228 35% 15%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 16 100% 60%;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 356 84% 46%;
 
     --radius: 0.5rem;
 
     /* Sidebar */
-    --sidebar-background: 220 20% 97%;
-    --sidebar-foreground: 228 35% 15%;
-    --sidebar-primary: 16 100% 60%;
+    --sidebar-background: 0 0% 97%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 356 84% 46%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 16 100% 95%;
-    --sidebar-accent-foreground: 16 100% 45%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 16 100% 60%;
+    --sidebar-accent: 356 84% 95%;
+    --sidebar-accent-foreground: 356 84% 36%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 356 84% 46%;
 
     /* Chat specific */
-    --chat-user-bg: 16 100% 60%;
+    --chat-user-bg: 356 84% 46%;
     --chat-user-fg: 0 0% 100%;
-    --chat-bot-bg: 220 20% 97%;
-    --chat-bot-fg: 228 35% 15%;
+    --chat-bot-bg: 0 0% 97%;
+    --chat-bot-fg: 0 0% 10%;
+
+    /* Header - Bold red like Ready Artwork */
+    --header-bg: 356 84% 46%;
+    --header-fg: 0 0% 100%;
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -72,42 +77,45 @@
   }
 
   .dark {
-    --background: 228 35% 8%;
-    --foreground: 220 20% 97%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 97%;
 
-    --card: 228 35% 12%;
-    --card-foreground: 220 20% 97%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 97%;
 
-    --popover: 228 35% 12%;
-    --popover-foreground: 220 20% 97%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 97%;
 
-    --primary: 16 100% 60%;
+    --primary: 356 84% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 228 25% 20%;
-    --secondary-foreground: 220 20% 97%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 97%;
 
-    --muted: 228 25% 20%;
-    --muted-foreground: 220 9% 60%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 228 25% 20%;
-    --accent-foreground: 220 20% 97%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 228 25% 20%;
-    --input: 228 25% 20%;
-    --ring: 16 100% 60%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 356 84% 50%;
 
-    --sidebar-background: 228 35% 10%;
-    --sidebar-foreground: 220 20% 97%;
-    --sidebar-primary: 16 100% 60%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 97%;
+    --sidebar-primary: 356 84% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 228 25% 18%;
-    --sidebar-accent-foreground: 16 100% 70%;
-    --sidebar-border: 228 25% 20%;
-    --sidebar-ring: 16 100% 60%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 356 84% 60%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 356 84% 50%;
+
+    --header-bg: 356 84% 46%;
+    --header-fg: 0 0% 100%;
   }
 }
 
@@ -191,6 +199,17 @@
   /* Skeleton loader */
   .skeleton {
     @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Header styles */
+  .header-red {
+    background-color: hsl(var(--header-bg));
+    color: hsl(var(--header-fg));
+  }
+
+  /* Yellow accent button */
+  .btn-yellow {
+    @apply bg-accent text-accent-foreground font-medium hover:brightness-110 transition-all;
   }
 }
 
