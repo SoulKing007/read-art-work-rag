@@ -8,3 +8,15 @@ __pycache__/
 dist/
 build/
 .DS_Store
+package.json
+package-lock.json
+bun.lockb
+src/
+public/
+index.html
+vite.config.ts
+tsconfig*.json
+components.json
+postcss.config.js
+tailwind.config.ts
+eslint.config.js
