@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { Trash2, Download, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,22 +16,33 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
-  sources?: Array<{ document: string; excerpt: string }>;
+  sources?: Array<{ document: string; excerpt: string; url?: string }>;
 }
 
-const initialMessages: Message[] = [
-  {
-    id: "1",
-    role: "assistant",
-    content: "Hello! I'm your RAG assistant. I can help you find information from your uploaded documents and meeting transcripts. What would you like to know?",
-    timestamp: new Date(Date.now() - 60000),
-  },
-];
+interface ChatInterfaceProps {
+  messages: Message[];
+  setMessages: Dispatch<SetStateAction<Message[]>>;
+}
 
-const ChatInterface = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+const BOT_NAME = "Archie";
+
+const ChatInterface = ({ messages, setMessages }: ChatInterfaceProps) => {
   const [isTyping, setIsTyping] = useState(false);
+  const [greetingText, setGreetingText] = useState("What's on your mind today?");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Generate dynamic greeting on mount
+  useEffect(() => {
+    const greetings = [
+      "What's on your mind today?",
+      "Ready when you are.",
+      "How can I help you today?",
+      "What would you like to know?",
+      "Ask me anything.",
+      "What can I help you with?",
+    ];
+    setGreetingText(greetings[Math.floor(Math.random() * greetings.length)]);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,32 +63,66 @@ const ChatInterface = () => {
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
+    try {
+      // Prepare conversation history (last 15 messages, excluding current one)
+      const history = messages.slice(-15).map((msg) => ({
+        role: msg.role,
+        content: msg.content,
+      }));
+
+      // Call the backend RAG API with history
+      const response = await fetch("http://localhost:8000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: content,
+          history: history,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: `I found relevant information about "${content}" in your documents. Based on the uploaded files, here's what I can tell you:\n\nThis is a simulated response. In production, this would be connected to your LangGraph backend to provide real RAG-powered responses based on your embedded documents and meeting transcripts.`,
+        content: data.answer || data.message || "I couldn't find relevant information for your query.",
         timestamp: new Date(),
-        sources: [
-          { document: "Q4_Report.pdf", excerpt: "Relevant section..." },
-          { document: "Meeting_Notes_Dec.docx", excerpt: "Related discussion..." },
-        ],
+        sources: data.sources?.map((source: { name: string; excerpt: string; type: string; url?: string }) => ({
+          document: source.name || source.type,
+          excerpt: source.excerpt || "",
+          url: source.url || "",
+        })) || [],
       };
       setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error("Chat API error:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: "Sorry, I encountered an error while processing your request. Please make sure the backend server is running on http://localhost:8000.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleClearChat = () => {
-    setMessages(initialMessages);
+    setMessages([]);
   };
 
   const handleExportChat = () => {
     const chatContent = messages
       .map((m) => `[${m.timestamp.toLocaleString()}] ${m.role}: ${m.content}`)
       .join("\n\n");
-    
+
     const blob = new Blob([chatContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -88,65 +133,36 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="flex h-full flex-col bg-background">
-      {/* Chat header */}
-      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
-        <div>
-          <h2 className="font-semibold">New Conversation</h2>
-          <p className="text-xs text-muted-foreground">
-            {messages.length - 1} messages
-          </p>
+    <div className="flex h-full flex-col bg-background relative">
+      {/* Messages container or empty state */}
+      {messages.length === 0 ? (
+        <div className="flex-1 flex flex-col items-center justify-center px-4">
+          <div className="w-full max-w-2xl">
+            <h1 className="text-3xl font-semibold text-center mb-8">{greetingText}</h1>
+            <ChatInput onSendMessage={handleSendMessage} disabled={isTyping} />
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleClearChat}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleExportChat}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Download className="h-4 w-4" />
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={handleClearChat}>
-                Clear conversation
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleExportChat}>
-                Export as text
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
+      ) : (
+        <>
+          {/* Messages scroll under the input - full height */}
+          <div className="h-full overflow-y-auto px-4 pt-6 scroll-smooth">
+            <div className="max-w-3xl mx-auto space-y-6 pb-40">
+              {messages.map((message) => (
+                <ChatMessage key={message.id} message={message} />
+              ))}
+              {isTyping && <TypingIndicator />}
+              <div ref={messagesEndRef} />
+            </div>
+          </div>
 
-      {/* Messages container */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin">
-        {messages.map((message) => (
-          <ChatMessage key={message.id} message={message} />
-        ))}
-        {isTyping && <TypingIndicator />}
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Input area */}
-      <ChatInput onSendMessage={handleSendMessage} disabled={isTyping} />
+          {/* Input area - absolutely positioned at bottom, overlapping content */}
+          <div className="absolute bottom-0 left-0 right-0 bg-background">
+            <div className="max-w-3xl mx-auto px-4 py-4">
+              <ChatInput onSendMessage={handleSendMessage} disabled={isTyping} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

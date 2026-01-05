@@ -5,6 +5,15 @@ import ChatInterface from "@/components/chat/ChatInterface";
 import DocumentsView from "@/components/documents/DocumentsView";
 import MeetingsView from "@/components/meetings/MeetingsView";
 
+// Chat message interface (shared with ChatInterface)
+export interface Message {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+  sources?: Array<{ document: string; excerpt: string; url?: string }>;
+}
+
 const pageTitles: Record<ViewType, string> = {
   chat: "Chat Interface",
   documents: "Document Management",
@@ -14,17 +23,19 @@ const pageTitles: Record<ViewType, string> = {
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>("chat");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  // Lift chat messages state here so it persists across tab switches
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const renderView = () => {
     switch (currentView) {
       case "chat":
-        return <ChatInterface />;
+        return <ChatInterface messages={messages} setMessages={setMessages} />;
       case "documents":
         return <DocumentsView />;
       case "meetings":
         return <MeetingsView />;
       default:
-        return <ChatInterface />;
+        return <ChatInterface messages={messages} setMessages={setMessages} />;
     }
   };
 

@@ -1,4 +1,4 @@
-import { Menu, Settings, LogOut, User, ChevronDown } from "lucide-react";
+import { Menu, Settings, LogOut, User, ChevronDown, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,8 +15,12 @@ interface HeaderProps {
 }
 
 const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
-    <header className="sticky top-0 z-40 h-16 bg-background border-b border-border">
+    <header className="sticky top-0 z-40 h-16 bg-background">
       <div className="flex h-full items-center justify-between px-4 lg:px-6">
         {/* Left: Menu button (mobile only) */}
         <div className="flex items-center gap-4">
@@ -30,8 +34,18 @@ const Header = ({ onMenuClick, pageTitle }: HeaderProps) => {
           </Button>
         </div>
 
-        {/* Right: User menu */}
-        <div className="flex items-center gap-3 ml-auto">
+        {/* Right: Refresh button and User menu */}
+        <div className="flex items-center gap-2 ml-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleRefresh}
+            className="text-muted-foreground hover:text-foreground"
+            title="Refresh page"
+          >
+            <RotateCw className="h-5 w-5" />
+          </Button>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
