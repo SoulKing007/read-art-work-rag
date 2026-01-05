@@ -71,7 +71,7 @@ const ChatInterface = ({ messages, setMessages }: ChatInterfaceProps) => {
       }));
 
       // Call the backend RAG API with history
-      const response = await fetch("http://localhost:8000/api/chat", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const ChatInterface = ({ messages, setMessages }: ChatInterfaceProps) => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Sorry, I encountered an error while processing your request. Please make sure the backend server is running on http://localhost:8000.",
+        content: `Sorry, I encountered an error while processing your request. Please make sure the backend server is running on ${import.meta.env.VITE_API_URL || "http://localhost:8000"}.`,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);

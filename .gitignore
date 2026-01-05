@@ -12,11 +12,17 @@ dist
 dist-ssr
 *.local
 
+# Frontend Environment Variables
+VITE_API_URL=http://localhost:8000
+
 # Environment variables
 .env
 .env.local
 .env.*.local
 api/.env
+
+# Supabase temp files
+supabase/.temp/
 
 # Python
 __pycache__/
