@@ -1,77 +1,60 @@
-# Ready Artwork RAG System
+# MeeFog RAG Knowledge Assistant
 
-Client knowledge system for MeeFog with RAG (Retrieval-Augmented Generation) powered by LangChain and LangGraph.
+AI-powered knowledge assistant for MeeFog client account using RAG (Retrieval Augmented Generation).
 
 ## Project Structure
 
-This is a monorepo containing:
-- **Frontend**: React + TypeScript + Vite + Shadcn UI (root directory)
-- **Backend**: Node.js + LangChain + LangGraph RAG API (`/backend` directory)
-
-## Frontend Setup
-
-The frontend is a React application built with modern tools.
-
-Requirements: Node.js 20+ & npm - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-### Frontend Development
-
-```sh
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+```
+read-art-work-rag/
+├── backend/           # Python FastAPI backend
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── nixpacks.toml
+│   └── railway.toml
+├── frontend/          # React + Vite frontend
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── railway.toml
+├── schema/            # Database schema
+└── DEPLOYMENT.md      # Deployment guide
 ```
 
-The frontend will run on `http://localhost:8080`
-
-### Backend Development
-
-See the [backend README](./backend/README.md) for detailed setup instructions.
-
-```sh
-cd backend
-npm install
-cp .env.example .env
-# Add your credentials to .env
-npm run dev
-```
-
-The backend will run on `http://localhost:3000`
-
-## Technologies
-
-### Frontend
-- React 18
-- TypeScript
-- Vite
-- Shadcn UI
-- Tailwind CSS
-- React Router
-- TanStack Query
+## Local Development
 
 ### Backend
-- Node.js 20+
-- LangChain.js
-- LangGraph
-- Supabase (Vector Store)
-- OpenAI (LLM & Embeddings)
-- Express.js
-- TypeScript
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
 ## Deployment
 
-### Frontend
-Deploy the frontend to any static hosting service (Vercel, Netlify, etc.)
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 
-```sh
-npm run build
-```
+### Quick Deploy on Railway
 
-### Backend
-Deploy the backend to Railway. See [backend/README.md](./backend/README.md) for detailed instructions.
+**Backend:**
+- Root Directory: `backend`
+- Add environment variables (OpenAI, Supabase)
 
-## License
+**Frontend:**
+- Root Directory: `frontend`
+- Add environment variable: `VITE_API_URL`
 
-MIT
+## Technologies
+
+- **Backend:** Python, FastAPI, LangChain, Supabase
+- **Frontend:** React, TypeScript, Vite, TailwindCSS
+- **AI:** OpenAI GPT-4, Text Embeddings
+- **Database:** Supabase (PostgreSQL + Vector)
